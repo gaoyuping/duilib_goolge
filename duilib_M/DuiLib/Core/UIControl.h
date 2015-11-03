@@ -27,7 +27,7 @@ public:
     virtual CPaintManagerUI* GetManager() const;
     virtual void SetManager(CPaintManagerUI* pManager, CControlUI* pParent, bool bInit = true);
     virtual CControlUI* GetParent() const;
-
+    void setInstance(HINSTANCE instance = NULL) {m_instance = instance;};
     // 文本相关
     virtual CDuiString GetText() const;
     virtual void SetText(LPCTSTR pstrText);
@@ -212,6 +212,8 @@ protected:
     SIZE m_cxyBorderRound;
     RECT m_rcPaint;
 	RECT m_rcBorderSize;
+    HINSTANCE m_instance;
+
 };
 
 } // namespace DuiLib

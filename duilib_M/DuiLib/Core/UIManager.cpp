@@ -1880,11 +1880,11 @@ const TImageInfo* CPaintManagerUI::GetImage(LPCTSTR bitmap)
     else return data;
 }
 
-const TImageInfo* CPaintManagerUI::GetImageEx(LPCTSTR bitmap, LPCTSTR type, DWORD mask)
+const TImageInfo* CPaintManagerUI::GetImageEx(LPCTSTR bitmap, LPCTSTR type, DWORD mask, HINSTANCE instance)
 {
     TImageInfo* data = static_cast<TImageInfo*>(m_mImageHash.Find(bitmap));
     if( !data ) {
-        if( AddImage(bitmap, type, mask) ) {
+        if( AddImage(bitmap, type, mask, instance) ) {
             data = static_cast<TImageInfo*>(m_mImageHash.Find(bitmap));
         }
     }
@@ -1892,14 +1892,14 @@ const TImageInfo* CPaintManagerUI::GetImageEx(LPCTSTR bitmap, LPCTSTR type, DWOR
     return data;
 }
 
-const TImageInfo* CPaintManagerUI::AddImage(LPCTSTR bitmap, LPCTSTR type, DWORD mask)
+const TImageInfo* CPaintManagerUI::AddImage(LPCTSTR bitmap, LPCTSTR type, DWORD mask, HINSTANCE instance)
 {
     TImageInfo* data = NULL;
     if( type != NULL ) {
         if( isdigit(*bitmap) ) {
             LPTSTR pstr = NULL;
             int iIndex = _tcstol(bitmap, &pstr, 10);
-            data = CRenderEngine::LoadImage(iIndex, type, mask);
+            data = CRenderEngine::LoadImage(iIndex, type, mask, instance);
         }
     }
     else {
